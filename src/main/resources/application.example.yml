@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Tamount-Backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Data-base-name
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
