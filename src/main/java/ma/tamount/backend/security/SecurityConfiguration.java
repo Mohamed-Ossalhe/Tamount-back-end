@@ -1,6 +1,7 @@
 package ma.tamount.backend.security;
 
 import lombok.RequiredArgsConstructor;
+import ma.tamount.backend.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -83,6 +85,7 @@ public class SecurityConfiguration {
     );
 
     // add jwtFilter, authProvider and logoutHandler beans here
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**
      * Configures the security filter chain for the application.
@@ -123,6 +126,10 @@ public class SecurityConfiguration {
                 )
                 // add auth provider here
                 // add jwtFilter here
+                .addFilterBefore(
+                        jwtAuthenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                )
                 .logout(logout ->
                         logout.logoutUrl("/api/v2/auth/logout")
                                 // add logout handler here
