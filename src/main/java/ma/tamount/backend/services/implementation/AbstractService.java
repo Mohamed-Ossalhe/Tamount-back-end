@@ -22,7 +22,7 @@ import java.util.Optional;
  * @param <E>     The entity type.
  * @param <P> The repository type extending JpaRepository<Entity, UUID>.
  * @param <M>     The mapper type implementing _Mapper<Req, Res, Entity>.
- * @author <a href="mailto:ouharri.outman@gmail.com">ouharri</a>
+ * @author Mohamed Ossalhe
  */
 @Slf4j
 @Validated

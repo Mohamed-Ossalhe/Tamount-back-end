@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Service class for handling JWT generation, parsing, and validation.
+ * @author Mohamed Ossalhe
+ */
 @Service
 public class JwtService {
     @Value("${application.security.jwt.secret-key}")
