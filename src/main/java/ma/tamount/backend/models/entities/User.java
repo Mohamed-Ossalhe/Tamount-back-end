@@ -6,10 +6,14 @@ import ma.tamount.backend.models.enums.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.SoftDelete;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,7 +34,7 @@ import java.util.List;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements UserDetails {
     /**
      * Represents the first name of the user.
      */
@@ -171,4 +175,36 @@ public class User extends AbstractEntity {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Preferences preferences;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(
+                new SimpleGrantedAuthority(getRole().toString())
+        );
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

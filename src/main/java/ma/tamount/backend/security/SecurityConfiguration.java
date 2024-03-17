@@ -5,6 +5,7 @@ import ma.tamount.backend.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -84,7 +85,7 @@ public class SecurityConfiguration {
             "X-Requested-With"
     );
 
-    // add jwtFilter, authProvider and logoutHandler beans here
+    private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**
@@ -124,15 +125,13 @@ public class SecurityConfiguration {
                                 .anyRequest()
                                 .authenticated()
                 )
-                // add auth provider here
-                // add jwtFilter here
+                .authenticationProvider(authenticationProvider)
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .logout(logout ->
                         logout.logoutUrl("/api/v2/auth/logout")
-                                // add logout handler here
                                 .logoutSuccessHandler((request, response, authentication) ->
                                         SecurityContextHolder.clearContext()
                                 )
