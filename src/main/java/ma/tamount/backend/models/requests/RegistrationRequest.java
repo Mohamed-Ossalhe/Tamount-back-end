@@ -32,9 +32,9 @@ public record RegistrationRequest(
         @Pattern(regexp = "^[a-zA-Z]{3,}$")
         String lastName,
 
-        @NotNull(message = "birth year is required")
+        @NotNull(message = "birth date is required")
         @DateTimeFormat(pattern = "dd/MM/yyyy")
-        LocalDate birthYear,
+        LocalDate birthDate,
 
         @NotNull(message = "gender is required")
         Gender gender,
@@ -44,8 +44,6 @@ public record RegistrationRequest(
         @Size(message = "password must be at least 8 characters", min = 8)
         String password,
 
-        @Pattern(message = "Phone number must match the format '0XXXXXXXXX'", regexp = "0\\d{9}")
-        @Null()
         PhoneRequest phoneNumber
 ) implements GenericRequest {
 }

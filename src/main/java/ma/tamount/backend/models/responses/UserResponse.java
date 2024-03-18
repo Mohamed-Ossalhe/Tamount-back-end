@@ -12,7 +12,6 @@ import ma.tamount.backend.models.enums.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.Year;
 
 /**
  * DTO (Data Transfer Object) representing user-related responses.
@@ -61,7 +60,7 @@ public class UserResponse extends AbstractResponse {
     /**
      * Represents the birth year of the user.
      */
-    private Year birthYear;
+    private Integer birthYear;
 
     /**
      * Represents the birthdate of the user.

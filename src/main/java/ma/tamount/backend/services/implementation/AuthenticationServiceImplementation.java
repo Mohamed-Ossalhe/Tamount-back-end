@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.Year;
 
 /**
  * Implementation of the Service class {@link AuthenticationService} for user authentication and token management.
@@ -88,9 +87,9 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 .firstName(request.firstName())
                 .lastName(request.lastName())
                 .bio(null)
-                .birthYear(Year.of(request.birthYear().getYear()))
-                .birthDate(request.birthYear())
-                .age(Utils.calculateAge(request.birthYear()))
+                .birthYear(request.birthDate().getYear())
+                .birthDate(request.birthDate())
+                .age(Utils.calculateAge(request.birthDate()))
                 .gender(request.gender())
                 .role(role)
                 .lastLogin(Timestamp.from(Instant.now()))
@@ -146,6 +145,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .username(user.getFirstName() + " " + user.getLastName())
+                .email(user.getEmail())
                 .role(user.getRole().toString())
                 .build();
     }
@@ -175,6 +175,9 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 var authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
+                        .email(user.getEmail())
+                        .username(user.getFirstName() + " " + user.getLastName())
+                        .role(user.getRole().toString())
                         .build();
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }

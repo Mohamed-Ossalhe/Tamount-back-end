@@ -37,9 +37,8 @@ import java.util.List;
 public class SecurityConfiguration {
 
     private static final List<String> WHITE_LIST_URL = List.of(
-            "/api/v2/**",
-            "/api/v2/auth/**",
-            "/api/v2/Oauth/**",
+            "/api/v1/auth/**",
+            "/api/v1/Oauth/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -53,8 +52,7 @@ public class SecurityConfiguration {
             "/actuator/**"
     );
     private static final List<String> ALLOW_ORIGIN = List.of(
-            "http://localhost:4200",
-            "https://ff15-197-230-250-154.ngrok-free.app"
+            "http://localhost:4200"
     );
     private static final List<String> ALLOW_METHODS = List.of(
             "GET",

@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.Collection;
 import java.util.List;
 
@@ -78,7 +77,7 @@ public class User extends AbstractEntity implements UserDetails {
      * Represents the birth year of the user.
      */
     @Column()
-    private Year birthYear;
+    private Integer birthYear;
 
     /**
      * Represents the birthdate of the user.
@@ -123,14 +122,14 @@ public class User extends AbstractEntity implements UserDetails {
      * Represents the timestamp when the user became a member.
      */
     @Column(nullable = false)
-    private Timestamp memberSince = Timestamp.from(Instant.now());
+    private Timestamp memberSince;
 
     /**
      * Represents the status of the user's ID verification.
      */
     @Column()
     @Enumerated(EnumType.STRING)
-    private IdChecked idChecked = IdChecked.TO_CHECK;
+    private IdChecked idChecked;
 
     /**
      * Represents the type of ID verification the user underwent.
@@ -162,7 +161,7 @@ public class User extends AbstractEntity implements UserDetails {
      */
     @Column()
     @Enumerated(EnumType.STRING)
-    private VerificationStatus verificationStatus = VerificationStatus.NOT_VERIFIED;
+    private VerificationStatus verificationStatus;
 
     /**
      * Represents the list of cars associated with the user.
@@ -177,6 +176,15 @@ public class User extends AbstractEntity implements UserDetails {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Preferences preferences;
+
+    /**
+     * set default values before persisting the entity using @PrePersist JPA lifecycle callbacks.
+     */
+    @PrePersist
+    protected void onMount() {
+        memberSince = Timestamp.from(Instant.now());
+        verificationStatus = VerificationStatus.NOT_VERIFIED;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
