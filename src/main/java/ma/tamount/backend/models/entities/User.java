@@ -2,6 +2,7 @@ package ma.tamount.backend.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ma.tamount.backend.models.enums.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Collection;
@@ -29,7 +31,7 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@Builder
+@SuperBuilder
 @SoftDelete
 @Table(name = "users")
 @AllArgsConstructor
@@ -121,14 +123,14 @@ public class User extends AbstractEntity implements UserDetails {
      * Represents the timestamp when the user became a member.
      */
     @Column(nullable = false)
-    private Timestamp memberSince;
+    private Timestamp memberSince = Timestamp.from(Instant.now());
 
     /**
      * Represents the status of the user's ID verification.
      */
     @Column()
     @Enumerated(EnumType.STRING)
-    private IdChecked idChecked;
+    private IdChecked idChecked = IdChecked.TO_CHECK;
 
     /**
      * Represents the type of ID verification the user underwent.
@@ -141,26 +143,26 @@ public class User extends AbstractEntity implements UserDetails {
      * Represents whether the user's email address is verified.
      */
     @Column(nullable = false)
-    private boolean emailVerified;
+    private boolean emailVerified = false;
 
     /**
      * Represents whether the user's phone number is verified.
      */
     @Column(nullable = false)
-    private boolean phoneVerified;
+    private boolean phoneVerified = false;
 
     /**
      * Represents whether the user has a profile picture.
      */
     @Column(nullable = false)
-    private boolean hasPicture;
+    private boolean hasPicture = false;
 
     /**
      * Represents the verification status of the user's account.
      */
     @Column()
     @Enumerated(EnumType.STRING)
-    private VerificationStatus verificationStatus;
+    private VerificationStatus verificationStatus = VerificationStatus.NOT_VERIFIED;
 
     /**
      * Represents the list of cars associated with the user.

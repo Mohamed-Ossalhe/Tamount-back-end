@@ -2,6 +2,7 @@ package ma.tamount.backend.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,7 +19,7 @@ import java.time.Year;
 @Setter
 @ToString
 @Entity
-@Builder
+@SuperBuilder
 @Table(name = "cars")
 @AllArgsConstructor
 @NoArgsConstructor

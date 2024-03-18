@@ -2,6 +2,7 @@ package ma.tamount.backend.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ma.tamount.backend.models.enums.PreferenceStatus;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @ToString
 @Entity
-@Builder
+@SuperBuilder
 @Table(name = "preferences")
 @AllArgsConstructor
 @NoArgsConstructor

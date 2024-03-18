@@ -2,6 +2,7 @@ package ma.tamount.backend.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
 
@@ -16,7 +17,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @Entity
-@Builder
+@SuperBuilder
 @Table(name = "verification_codes")
 @AllArgsConstructor
 @NoArgsConstructor
