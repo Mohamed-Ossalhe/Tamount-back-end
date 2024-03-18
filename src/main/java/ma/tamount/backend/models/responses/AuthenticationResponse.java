@@ -14,7 +14,6 @@ import java.io.Serializable;
  * Contains access and refresh tokens.
  *
  * @author Mohamed Ossalhe
- * @version 2.0
  */
 @Data
 @Builder

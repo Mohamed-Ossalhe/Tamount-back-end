@@ -22,6 +22,7 @@ import java.time.LocalDate;
  * layers of the application, primarily for response purposes.</p>
  *
  * @see User
+ * @author Mohamed Ossalhe
  */
 @Getter
 @Setter

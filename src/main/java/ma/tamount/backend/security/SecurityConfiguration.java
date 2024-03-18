@@ -129,7 +129,7 @@ public class SecurityConfiguration {
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .logout(logout ->
-                        logout.logoutUrl("/api/v2/auth/logout")
+                        logout.logoutUrl("/api/v1/auth/logout")
                                 .logoutSuccessHandler((request, response, authentication) ->
                                         SecurityContextHolder.clearContext()
                                 )
