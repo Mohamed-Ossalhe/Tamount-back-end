@@ -1,6 +1,7 @@
 package ma.tamount.backend.handlers;
 
 import lombok.extern.slf4j.Slf4j;
+import ma.tamount.backend.exceptions.ResourceAlreadyExistsException;
 import ma.tamount.backend.exceptions.ResourceNotCreatedException;
 import ma.tamount.backend.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException exception) {
         ErrorResponse errorResponse = ErrorResponse.create(exception, HttpStatus.NOT_FOUND, exception.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * Handle MethodArgumentNotValidException and return a proper API error response.
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleResourceAlreadyExistsException(ResourceAlreadyExistsException exception) {
+        ErrorResponse errorResponse = ErrorResponse.create(exception, HttpStatus.BAD_REQUEST, exception.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     /**
