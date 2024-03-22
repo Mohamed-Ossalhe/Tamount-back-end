@@ -1,13 +1,17 @@
 package ma.tamount.backend.services;
 
+import ma.tamount.backend.interfaces.GenericService;
+import ma.tamount.backend.models.requests.RegistrationRequest;
 import ma.tamount.backend.models.responses.UserResponse;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+
+import java.util.UUID;
 
 /**
  * Service interface for managing User entity.
  * @author Mohamed Ossalhe
  */
-public interface UserService {
+public interface UserService extends GenericService<UUID, RegistrationRequest, UserResponse> {
     /**
      * Retrieves the currently authenticated user.
      * <p>

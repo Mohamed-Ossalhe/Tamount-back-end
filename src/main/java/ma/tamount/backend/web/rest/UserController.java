@@ -2,6 +2,7 @@ package ma.tamount.backend.web.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ma.tamount.backend.models.requests.RegistrationRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ma.tamount.backend.models.responses.UserResponse;
 import ma.tamount.backend.services.UserService;
+
+import java.util.UUID;
 
 /**
  * Controller class handling user-related endpoints.
@@ -25,7 +28,7 @@ import ma.tamount.backend.services.UserService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController extends AbstractController<UUID, RegistrationRequest, UserResponse, UserService> {
 
     private final UserService service;
 
