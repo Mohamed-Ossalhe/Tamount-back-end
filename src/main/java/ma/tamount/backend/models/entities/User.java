@@ -178,6 +178,20 @@ public class User extends AbstractEntity implements UserDetails {
     private Preferences preferences;
 
     /**
+     * Represents the list of bookings associated with the user.
+     */
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Booking> bookings;
+
+    /**
+     * Represents the list of rides associated with the user.
+     */
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Ride> rides;
+
+    /**
      * set default values before persisting the entity using @PrePersist JPA lifecycle callbacks.
      */
     @PrePersist
