@@ -18,7 +18,7 @@ import java.util.Optional;
 /**
  * Generic service implementation with common CRUD operations.
  *
- * @param <T>        The type of the unique identifier.
+ * @param <I>        The type of the unique identifier.
  * @param <R>        The request DTO type.
  * @param <S>        The response DTO type.
  * @param <E>     The entity type.
@@ -30,7 +30,7 @@ import java.util.Optional;
 @Validated
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class AbstractService<T, R extends GenericRequest, S extends GenericResponse, E extends GenericEntity<T>, P extends JpaRepository<E, T>, M extends GenericMapper<T, R, S, E>> implements GenericService<T, R, S> {
+public abstract class AbstractService<I, R extends GenericRequest, S extends GenericResponse, E extends GenericEntity<I>, P extends JpaRepository<E, I>, M extends GenericMapper<I, R, S, E>> implements GenericService<I, R, S> {
 
     private M mapper;
     private P repository;
@@ -118,7 +118,7 @@ public abstract class AbstractService<T, R extends GenericRequest, S extends Gen
      * @return Optional containing the response DTO of the found entity.
      */
     @Override
-    public Optional<S> getById(T id) {
+    public Optional<S> getById(I id) {
         assertMapperAndRepositoryNotNull();
         return repository.findById(id)
                 .map(mapper::toResponse);
