@@ -1,8 +1,10 @@
 package ma.tamount.backend.services.implementation;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ma.tamount.backend.exceptions.ResourceNotCreatedException;
 import ma.tamount.backend.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,8 +32,8 @@ import java.util.Optional;
 @NoArgsConstructor
 public abstract class AbstractService<T, R extends GenericRequest, S extends GenericResponse, E extends GenericEntity<T>, P extends JpaRepository<E, T>, M extends GenericMapper<T, R, S, E>> implements GenericService<T, R, S> {
 
-    M mapper;
-    P repository;
+    private M mapper;
+    private P repository;
 
     @Autowired
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -45,33 +47,107 @@ public abstract class AbstractService<T, R extends GenericRequest, S extends Gen
         this.repository = repository;
     }
 
+    /**
+     * Retrieves a list of all entities.
+     *
+     * @return List of response DTOs representing all entities.
+     */
     @Override
     public List<S> getAll() {
-        return List.of();
+        assertMapperAndRepositoryNotNull();
+        return mapper.toResponse(
+                repository.findAll()
+        );
     }
 
+    /**
+     * Retrieves all entities in a paginated form.
+     *
+     * @param pageable Pagination information.
+     * @return Page of response DTOs.
+     */
     @Override
     public Page<S> getAll(Pageable pageable) {
-        return null;
+        assertMapperAndRepositoryNotNull();
+        return repository.findAll(pageable)
+                .map(mapper::toResponse);
     }
 
+    /**
+     * Creates a new entity based on the provided request DTO.
+     *
+     * @param request DTO containing data for entity creation.
+     * @return Optional containing the response DTO of the created entity.
+     */
     @Override
-    public Optional<S> create(R request) {
-        return Optional.empty();
+    public Optional<S> create(@Valid R request) {
+        assertMapperAndRepositoryNotNull();
+        E entityToCreate = mapper.toEntityFromRequest(request);
+        try {
+            E createdEntity = repository.saveAndFlush(entityToCreate);
+            return Optional.of(mapper.toResponse(createdEntity));
+        } catch (Exception e) {
+            log.error("Error while creating entity", e);
+            throw new ResourceNotCreatedException(e.getMessage());
+        }
     }
 
+    /**
+     * Updates an existing entity based on the provided response DTO.
+     *
+     * @param request DTO containing updated data.
+     * @return Optional containing the response DTO of the updated entity.
+     */
     @Override
-    public Optional<S> update(R request) {
-        return Optional.empty();
+    public Optional<S> update(@Valid R request) {
+        assertMapperAndRepositoryNotNull();
+        E entityToUpdate = mapper.toEntityFromRequest(request);
+        try {
+            E updatedEntity = repository.saveAndFlush(entityToUpdate);
+            return Optional.of(mapper.toResponse(updatedEntity));
+        } catch (Exception e) {
+            log.error("Error while updating entity", e);
+            throw new ResourceNotCreatedException(e.getMessage());
+        }
     }
 
+    /**
+     * Retrieves an entity by its unique identifier.
+     *
+     * @param id Unique identifier of the entity.
+     * @return Optional containing the response DTO of the found entity.
+     */
     @Override
     public Optional<S> getById(T id) {
-        return Optional.empty();
+        assertMapperAndRepositoryNotNull();
+        return repository.findById(id)
+                .map(mapper::toResponse);
     }
 
+    /**
+     * Deletes an entity based on the provided response DTO.
+     *
+     * @param request DTO containing data for entity deletion.
+     * @return Boolean indicating the success of the deletion operation.
+     */
     @Override
-    public Boolean delete(R request) {
-        return false;
+    public Boolean delete(@Valid R request) {
+        assertMapperAndRepositoryNotNull();
+        E entityToDelete = mapper.toEntityFromRequest(request);
+        if (!repository.existsById(entityToDelete.getId())) {
+            return false;
+        }
+        try {
+            repository.delete(entityToDelete);
+        } catch (Exception e) {
+            log.error("Error while deleting entity", e);
+            throw new ResourceNotCreatedException(e.getMessage());
+        }
+        return true;
+    }
+
+    public void assertMapperAndRepositoryNotNull() {
+        assert mapper != null;
+        assert repository != null;
     }
 }
