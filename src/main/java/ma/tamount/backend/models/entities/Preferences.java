@@ -28,6 +28,7 @@ public class Preferences extends AbstractEntity {
      * This field is mapped to a database column with the constraint that it cannot be null.
      */
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PreferenceStatus smoking;
 
     /**
@@ -35,6 +36,7 @@ public class Preferences extends AbstractEntity {
      * This field is mapped to a database column with the constraint that it cannot be null.
      */
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PreferenceStatus music;
 
     /**
@@ -42,6 +44,7 @@ public class Preferences extends AbstractEntity {
      * This field is mapped to a database column with the constraint that it cannot be null.
      */
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PreferenceStatus pets;
 
     /**
@@ -49,6 +52,7 @@ public class Preferences extends AbstractEntity {
      * This field is mapped to a database column with the constraint that it cannot be null.
      */
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PreferenceStatus dialog;
 
     /**

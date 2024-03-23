@@ -28,6 +28,8 @@ public class Booking extends AbstractEntity {
     /**
      * The status of this booking.
      */
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
 
     /**

@@ -1,11 +1,9 @@
 package ma.tamount.backend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import ma.tamount.backend.models.enums.Currency;
 import ma.tamount.backend.models.enums.PaymentMethod;
 import ma.tamount.backend.models.enums.PaymentStatus;
 
@@ -33,6 +31,8 @@ public class PaymentHistory extends AbstractEntity {
     /**
      * The payment method used for this payment.
      */
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     /**
@@ -43,6 +43,8 @@ public class PaymentHistory extends AbstractEntity {
     /**
      * The status of the payment.
      */
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentStatus status;
 
     /**
@@ -53,7 +55,9 @@ public class PaymentHistory extends AbstractEntity {
     /**
      * The currency of the payment.
      */
-    private String currency;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     /**
      * The URL to the receipt for this payment.
