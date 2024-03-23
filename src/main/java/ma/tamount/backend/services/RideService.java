@@ -7,7 +7,7 @@ import ma.tamount.backend.models.responses.RideResponse;
 import java.util.UUID;
 
 /**
- * Service interface for managing User entity.
+ * Service interface for managing Ride entity.
  * @author Mohamed Ossalhe
  */
 public interface RideService extends GenericService<UUID, RideRequest, RideResponse> {

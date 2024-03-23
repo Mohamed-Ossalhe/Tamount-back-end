@@ -16,9 +16,9 @@ import java.sql.Timestamp;
 
 /**
  * DTO (Data Transfer Object) representing ride-related responses.
- * This class is designed to carry user-related information in a format suitable for response payloads.
+ * This class is designed to carry ride-related information in a format suitable for response payloads.
  *
- * <p>The fields in this class provide details about the ride. It is used to transfer user data between different
+ * <p>The fields in this class provide details about the ride. It is used to transfer ride data between different
  * layers of the application, primarily for response purposes.</p>
  *
  * @see Ride
