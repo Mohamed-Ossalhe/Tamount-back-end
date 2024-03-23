@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ma.tamount.backend.models.entities.PaymentHistory;
+import ma.tamount.backend.models.entities.Phone;
 import ma.tamount.backend.models.enums.RegionCode;
 
 /**
@@ -16,10 +16,9 @@ import ma.tamount.backend.models.enums.RegionCode;
  * <p>The fields in this class provide details about the phone. It is used to transfer phone data between different
  * layers of the application, primarily for response purposes.</p>
  *
- * @see PaymentHistory
+ * @see Phone
  * @author Mohamed Ossalhe
- */
-@Getter
+ */@Getter
 @Setter
 @SuperBuilder
 @AllArgsConstructor
