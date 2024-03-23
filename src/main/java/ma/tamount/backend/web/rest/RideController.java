@@ -15,10 +15,10 @@ import java.util.UUID;
  * Controller class handling ride-related endpoints.
  *
  * <p>This class provides REST full endpoints for retrieving different categories of ride.
- * It utilizes the {@link RideService} to fetch user data and returns the results in the form of {@link RideResponse}.
+ * It utilizes the {@link RideService} to fetch ride data and returns the results in the form of {@link RideResponse}.
  * </p>
  *
- * @version 1.0
+ * @author Mohamed Ossalhe
  */
 @Slf4j
 @Validated

@@ -21,7 +21,7 @@ import java.util.UUID;
  * It utilizes the {@link UserService} to fetch user data and returns the results in the form of {@link UserResponse}.
  * </p>
  *
- * @version 1.0
+ * @author Mohamed Ossalhe
  */
 @Slf4j
 @Validated
