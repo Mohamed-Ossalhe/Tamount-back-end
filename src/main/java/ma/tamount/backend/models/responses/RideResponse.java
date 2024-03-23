@@ -1,100 +1,93 @@
-package ma.tamount.backend.models.entities;
+package ma.tamount.backend.models.responses;
 
-import jakarta.persistence.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import ma.tamount.backend.models.entities.Car;
+import ma.tamount.backend.models.entities.Location;
+import ma.tamount.backend.models.entities.User;
+import ma.tamount.backend.models.entities.Ride;
 import ma.tamount.backend.models.enums.ApprovalMode;
 
 import java.sql.Timestamp;
 
 /**
- * Represents a ride entity in the system.
- * This class includes information about a ride such departure location, arrival location, departure time, approval mode,
- * is comfortable, womenOnly,  seats, route_id, and vehicle_id.
+ * DTO (Data Transfer Object) representing ride-related responses.
+ * This class is designed to carry user-related information in a format suitable for response payloads.
  *
+ * <p>The fields in this class provide details about the ride. It is used to transfer user data between different
+ * layers of the application, primarily for response purposes.</p>
+ *
+ * @see Ride
  * @author Mohamed Ossalhe
  */
 @Getter
 @Setter
-@ToString
-@Entity
 @SuperBuilder
-@Table(name = "rides")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ride extends AbstractEntity {
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class RideResponse extends AbstractResponse {
     /**
      * The departure location of the ride.
      */
-    @OneToOne(fetch = FetchType.EAGER)
     private Location departure;
 
     /**
      * The arrival location of the ride.
      */
-    @OneToOne(fetch = FetchType.EAGER)
     private Location arrival;
 
     /**
      * The departure time of the ride.
      */
-    @Column(nullable = false)
     private Timestamp departureTime;
 
     /**
      * The approval mode of the ride.
      */
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private ApprovalMode approvalMode;
 
     /**
      * Indicates whether the ride offers comfort amenities.
      */
-    @Column(nullable = false)
     private boolean isComfort;
 
     /**
      * Indicates whether the ride is cancelled or not.
      */
-    @Column(nullable = false)
-    private boolean isCancelled = false;
+    private boolean isCancelled;
 
     /**
      * Indicates whether the ride is for women only.
      */
-    @Column(nullable = false)
     private boolean womenOnly;
 
     /**
      * The number of available seats in the ride.
      */
-    @Column(nullable = false)
     private Integer seats;
 
     /**
      * The price of the trip.
      */
-    @Column(nullable = false)
     private Integer price;
 
     /**
      * The identifier of the route associated with the ride.
      */
-    @Column(nullable = false)
     private String routeId;
 
     /**
      * The user associated with the ride.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     /**
      * The vehicle associated with the ride.
      */
-    @OneToOne(fetch = FetchType.LAZY)
     private Car vehicle;
 }
-

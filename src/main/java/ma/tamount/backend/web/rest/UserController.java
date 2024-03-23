@@ -17,7 +17,7 @@ import java.util.UUID;
 /**
  * Controller class handling user-related endpoints.
  *
- * <p>This class provides REST full endpoints for retrieving different categories of users (managers, job-seekers, and agents).
+ * <p>This class provides REST full endpoints for retrieving different categories of users.
  * It utilizes the {@link UserService} to fetch user data and returns the results in the form of {@link UserResponse}.
  * </p>
  *
