@@ -6,8 +6,6 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.Year;
-
 /**
  * Represents a car entity in the system.
  * This class includes information about a car such as its model, maker, color, comfort,
@@ -64,7 +62,7 @@ public class Car extends AbstractEntity {
      * Represents the registration year of the vehicle.
      */
     @Column(nullable = false)
-    private Year registrationYear;
+    private Integer registrationYear;
 
     /**
      * Represents the user who owns the vehicle.

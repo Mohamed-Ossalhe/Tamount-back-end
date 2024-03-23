@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ma.tamount.backend.models.entities.Phone;
 import ma.tamount.backend.models.entities.User;
 import ma.tamount.backend.models.enums.*;
 
@@ -76,7 +75,7 @@ public class UserResponse extends AbstractResponse {
     /**
      * Represents the phone number associated with the user.
      */
-    private Phone phone;
+    private PhoneResponse phone;
 
     /**
      * Represents the gender of the user.

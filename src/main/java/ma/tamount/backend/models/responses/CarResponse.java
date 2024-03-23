@@ -8,8 +8,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import ma.tamount.backend.models.entities.Car;
 
-import java.time.Year;
-
 /**
  * DTO (Data Transfer Object) representing car-related responses.
  * This class is designed to carry car-related information in a format suitable for response payloads.
@@ -60,7 +58,7 @@ public class CarResponse extends AbstractResponse {
     /**
      * Represents the registration year of the vehicle.
      */
-    private Year registrationYear;
+    private Integer registrationYear;
 
     /**
      * Represents the user who owns the vehicle.

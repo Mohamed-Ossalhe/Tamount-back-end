@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ma.tamount.backend.models.entities.Car;
-import ma.tamount.backend.models.entities.Location;
-import ma.tamount.backend.models.entities.User;
 import ma.tamount.backend.models.entities.Ride;
 import ma.tamount.backend.models.enums.ApprovalMode;
 
@@ -34,12 +31,12 @@ public class RideResponse extends AbstractResponse {
     /**
      * The departure location of the ride.
      */
-    private Location departure;
+    private LocationResponse departure;
 
     /**
      * The arrival location of the ride.
      */
-    private Location arrival;
+    private LocationResponse arrival;
 
     /**
      * The departure time of the ride.
@@ -84,10 +81,10 @@ public class RideResponse extends AbstractResponse {
     /**
      * The user associated with the ride.
      */
-    private User user;
+    private UserResponse user;
 
     /**
      * The vehicle associated with the ride.
      */
-    private Car vehicle;
+    private CarResponse vehicle;
 }

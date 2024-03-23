@@ -1,5 +1,6 @@
 package ma.tamount.backend.models.requests;
 
+import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
 import ma.tamount.backend.models.enums.RegionCode;
 
@@ -11,7 +12,9 @@ import ma.tamount.backend.models.enums.RegionCode;
  */
 
 public record CityRequest(
+        @NotNull(message = "name is required")
         String name,
+        @NotNull(message = "name is required")
         RegionCode country
 ) implements GenericRequest {
 }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import ma.tamount.backend.models.entities.Booking;
-import ma.tamount.backend.models.entities.PaymentHistory;
 import ma.tamount.backend.models.enums.BookingStatus;
 
 /**
@@ -51,5 +50,5 @@ public class BookingResponse extends AbstractResponse {
     /**
      * The payment history associated with the booking.
      */
-    private PaymentHistory paymentHistory;
+    private PaymentHistoryResponse paymentHistory;
 }

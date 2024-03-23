@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import ma.tamount.backend.models.entities.Location;
-import ma.tamount.backend.models.entities.City;
 
 /**
  * DTO (Data Transfer Object) representing car-related responses.
@@ -29,7 +28,7 @@ public class LocationResponse extends AbstractResponse {
     /**
      * The city associated with this location.
      */
-    private City city;
+    private CityResponse city;
 
     /**
      * The address of this location.
