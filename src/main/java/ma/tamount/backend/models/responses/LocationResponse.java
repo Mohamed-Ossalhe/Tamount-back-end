@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ma.tamount.backend.models.entities.Car;
-
-import java.time.Year;
+import ma.tamount.backend.models.entities.Location;
+import ma.tamount.backend.models.entities.City;
 
 /**
  * DTO (Data Transfer Object) representing car-related responses.
@@ -17,7 +16,7 @@ import java.time.Year;
  * <p>The fields in this class provide details about the car. It is used to transfer car data between different
  * layers of the application, primarily for response purposes.</p>
  *
- * @see Car
+ * @see Location
  * @author Mohamed Ossalhe
  */
 @Getter
@@ -26,44 +25,24 @@ import java.time.Year;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CarResponse extends AbstractResponse {
+public class LocationResponse extends AbstractResponse {
     /**
-     * Represents the model of the vehicle.
+     * The city associated with this location.
      */
-    private String model;
+    private City city;
 
     /**
-     * Represents the make of the vehicle.
+     * The address of this location.
      */
-    private String make;
+    private String address;
 
     /**
-     * Represents the color of the vehicle.
+     * Latitude of the location.
      */
-    private String color;
+    private Double latitude;
 
     /**
-     * Represents the comfort level of the vehicle.
+     * Longitude of the location.
      */
-    private String comfort;
-
-    /**
-     * Represents the category of the vehicle.
-     */
-    private String category;
-
-    /**
-     * Represents the license plate of the vehicle.
-     */
-    private String licensePlate;
-
-    /**
-     * Represents the registration year of the vehicle.
-     */
-    private Year registrationYear;
-
-    /**
-     * Represents the user who owns the vehicle.
-     */
-    private UserResponse user;
+    private Double longitude;
 }
