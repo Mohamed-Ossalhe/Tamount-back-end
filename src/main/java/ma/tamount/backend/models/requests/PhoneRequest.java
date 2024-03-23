@@ -20,6 +20,8 @@ public record PhoneRequest(
         @NotNull(message = "national number is required")
         String internationalFormattedNumber,
         @NotNull(message = "national number is required")
-        RegionCode regionCode
+        RegionCode regionCode,
+        @NotNull(message = "user is required")
+        RegistrationRequest user
 ) implements GenericRequest {
 }
