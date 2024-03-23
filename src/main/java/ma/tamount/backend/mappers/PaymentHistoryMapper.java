@@ -20,7 +20,8 @@ import java.util.UUID;
 @Mapper(
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        componentModel = MappingConstants.ComponentModel.SPRING
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {BookingMapper.class}
 )
 public interface PaymentHistoryMapper extends GenericMapper<UUID, PaymentHistoryRequest, PaymentHistoryResponse, PaymentHistory> {
 }

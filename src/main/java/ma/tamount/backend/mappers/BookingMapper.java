@@ -20,7 +20,8 @@ import java.util.UUID;
 @Mapper(
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        componentModel = MappingConstants.ComponentModel.SPRING
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {UserMapper.class, RideMapper.class}
 )
 public interface BookingMapper extends GenericMapper<UUID, BookingRequest, BookingResponse, Booking> {
 }
