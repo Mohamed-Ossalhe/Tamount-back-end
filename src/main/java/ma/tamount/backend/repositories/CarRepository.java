@@ -2,9 +2,11 @@ package ma.tamount.backend.repositories;
 
 import io.micrometer.common.lang.NonNullApi;
 import ma.tamount.backend.models.entities.Car;
+import ma.tamount.backend.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -18,4 +20,5 @@ import java.util.UUID;
 @Repository
 @NonNullApi
 public interface CarRepository extends JpaRepository<Car, UUID> {
+    List<Car> findAllByUser(User user);
 }

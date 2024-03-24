@@ -3,6 +3,8 @@ package ma.tamount.backend.models.requests;
 import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
 import ma.tamount.backend.models.enums.BookingStatus;
+import ma.tamount.backend.models.responses.RideResponse;
+import ma.tamount.backend.models.responses.UserResponse;
 
 /**
  * Data Transfer Object (DTO) for Booking requests.
@@ -15,8 +17,8 @@ public record BookingRequest(
         BookingStatus bookingStatus,
         String cancellationReason,
         @NotNull(message = "user is required")
-        RegistrationRequest user,
+        UserResponse user,
         @NotNull(message = "ride is required")
-        RideRequest ride
+        RideResponse ride
 ) implements GenericRequest {
 }

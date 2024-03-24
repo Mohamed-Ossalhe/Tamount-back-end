@@ -5,6 +5,7 @@ import ma.tamount.backend.interfaces.GenericRequest;
 import ma.tamount.backend.models.enums.Currency;
 import ma.tamount.backend.models.enums.PaymentMethod;
 import ma.tamount.backend.models.enums.PaymentStatus;
+import ma.tamount.backend.models.responses.BookingResponse;
 
 /**
  * Data Transfer Object (DTO) for Payment History requests.
@@ -25,6 +26,6 @@ public record PaymentHistoryRequest(
         Currency currency,
         String receiptUrl,
         @NotNull(message = "booking is required")
-        BookingRequest booking
+        BookingResponse booking
 ) implements GenericRequest {
 }

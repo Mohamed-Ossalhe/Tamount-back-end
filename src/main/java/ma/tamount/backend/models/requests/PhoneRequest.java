@@ -3,6 +3,7 @@ package ma.tamount.backend.models.requests;
 import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
 import ma.tamount.backend.models.enums.RegionCode;
+import ma.tamount.backend.models.responses.UserResponse;
 
 /**
  * Data Transfer Object (DTO) for Phone requests.
@@ -22,6 +23,6 @@ public record PhoneRequest(
         @NotNull(message = "national number is required")
         RegionCode regionCode,
         @NotNull(message = "user is required")
-        RegistrationRequest user
+        UserResponse user
 ) implements GenericRequest {
 }

@@ -2,6 +2,7 @@ package ma.tamount.backend.models.requests;
 
 import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
+import ma.tamount.backend.models.responses.UserResponse;
 
 /**
  * Data Transfer Object (DTO) for Car requests.
@@ -26,6 +27,6 @@ public record CarRequest(
         @NotNull(message = "registration year is required")
         Integer registrationYear,
         @NotNull(message = "user is required")
-        RegistrationRequest user
+        UserResponse user
 ) implements GenericRequest {
 }

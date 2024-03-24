@@ -2,6 +2,7 @@ package ma.tamount.backend.models.requests;
 
 import ma.tamount.backend.interfaces.GenericRequest;
 import ma.tamount.backend.models.enums.PreferenceStatus;
+import ma.tamount.backend.models.responses.UserResponse;
 
 
 /**
@@ -16,6 +17,6 @@ public record PreferencesRequest(
         PreferenceStatus pets,
         PreferenceStatus dialog,
         Boolean preferencesSaved,
-        RegistrationRequest user
+        UserResponse user
 ) implements GenericRequest {
 }

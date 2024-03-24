@@ -2,6 +2,7 @@ package ma.tamount.backend.services;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ma.tamount.backend.models.entities.User;
 import ma.tamount.backend.models.enums.Role;
 import ma.tamount.backend.models.requests.AuthenticationRequest;
 import ma.tamount.backend.models.requests.RegistrationRequest;
@@ -64,4 +65,6 @@ public interface AuthenticationService {
      * @return true if the token is valid, false otherwise
      */
     Boolean checkToken(String token);
+
+    User authenticatedUser();
 }

@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import ma.tamount.backend.models.requests.CarRequest;
 import ma.tamount.backend.models.responses.CarResponse;
 import ma.tamount.backend.services.CarService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -26,4 +28,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/cars")
 public class CarController extends AbstractController<UUID, CarRequest, CarResponse, CarService> {
+    private final CarService service;
+
+    @GetMapping("/owned")
+    public ResponseEntity<List<CarResponse>> findAllCarsByUser() {
+        return new ResponseEntity<>(service.findAllCarsByUser(), HttpStatus.OK);
+    }
 }

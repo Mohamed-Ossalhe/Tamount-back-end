@@ -2,6 +2,7 @@ package ma.tamount.backend.models.requests;
 
 import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
+import ma.tamount.backend.models.responses.CityResponse;
 
 
 /**
@@ -13,7 +14,7 @@ import ma.tamount.backend.interfaces.GenericRequest;
 
 public record LocationRequest(
         @NotNull(message = "city is required")
-        CityRequest city,
+        CityResponse city,
         @NotNull(message = "address is required")
         String address,
         Double latitude,

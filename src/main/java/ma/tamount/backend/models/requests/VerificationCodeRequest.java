@@ -3,6 +3,7 @@ package ma.tamount.backend.models.requests;
 import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
 import ma.tamount.backend.models.enums.VerificationCodeType;
+import ma.tamount.backend.models.responses.UserResponse;
 
 import java.sql.Timestamp;
 
@@ -20,6 +21,6 @@ public record VerificationCodeRequest(
         @NotNull(message = "type is required")
         VerificationCodeType type,
         @NotNull(message = "user is required")
-        RegistrationRequest user
+        UserResponse user
 ) implements GenericRequest {
 }

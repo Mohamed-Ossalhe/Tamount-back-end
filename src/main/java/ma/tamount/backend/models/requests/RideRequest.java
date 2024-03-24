@@ -2,8 +2,10 @@ package ma.tamount.backend.models.requests;
 
 import jakarta.validation.constraints.NotNull;
 import ma.tamount.backend.interfaces.GenericRequest;
-import ma.tamount.backend.models.entities.Location;
 import ma.tamount.backend.models.enums.ApprovalMode;
+import ma.tamount.backend.models.responses.CarResponse;
+import ma.tamount.backend.models.responses.LocationResponse;
+import ma.tamount.backend.models.responses.UserResponse;
 
 import java.sql.Timestamp;
 
@@ -15,9 +17,9 @@ import java.sql.Timestamp;
  */
 public record RideRequest(
         @NotNull(message = "departure is required")
-        Location departure,
+        LocationResponse departure,
         @NotNull(message = "arrival is required")
-        Location arrival,
+        LocationResponse arrival,
         @NotNull(message = "departure time is required")
         Timestamp departureTime,
         @NotNull(message = "approval mode is required")
@@ -33,8 +35,8 @@ public record RideRequest(
         @NotNull(message = "route id is required")
         String routeId,
         @NotNull(message = "user is required")
-        RegistrationRequest user,
+        UserResponse user,
         @NotNull(message = "vehicle is required")
-        CarRequest vehicle
+        CarResponse vehicle
 ) implements GenericRequest {
 }

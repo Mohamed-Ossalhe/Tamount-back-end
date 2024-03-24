@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ma.tamount.backend.exceptions.NoAuthenticationUserFoundException;
 import ma.tamount.backend.exceptions.ResourceNotFoundException;
 import ma.tamount.backend.models.entities.User;
 import ma.tamount.backend.models.enums.Role;
@@ -16,10 +17,14 @@ import ma.tamount.backend.security.jwt.JwtService;
 import ma.tamount.backend.services.AuthenticationService;
 import ma.tamount.backend.utils.Utils;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -139,6 +144,7 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 .orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND_MESSAGE_EXCEPTION));
         var jwtToken = jwtService.generateAccessToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
+        user.setLastLogin(Timestamp.from(Instant.now()));
         repository.save(user);
 
         return AuthenticationResponse.builder()
@@ -203,5 +209,21 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
             return jwtService.isTokenValid(jwt, user);
         }
         return false;
+    }
+
+    @Override
+    public User authenticatedUser() {
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        if (authentication == null ||
+                !authentication.isAuthenticated() ||
+                authentication instanceof AnonymousAuthenticationToken)
+            throw new NoAuthenticationUserFoundException("User not authenticated");
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return repository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND_MESSAGE_EXCEPTION));
     }
 }
