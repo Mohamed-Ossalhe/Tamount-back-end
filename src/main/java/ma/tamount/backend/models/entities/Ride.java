@@ -27,13 +27,13 @@ public class Ride extends AbstractEntity {
     /**
      * The departure location of the ride.
      */
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Location departure;
 
     /**
      * The arrival location of the ride.
      */
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Location arrival;
 
     /**

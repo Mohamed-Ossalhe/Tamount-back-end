@@ -19,6 +19,8 @@ public record BookingRequest(
         @NotNull(message = "user is required")
         UserResponse user,
         @NotNull(message = "ride is required")
-        RideResponse ride
+        RideResponse ride,
+        @NotNull()
+        ChargeRequest chargeRequest
 ) implements GenericRequest {
 }

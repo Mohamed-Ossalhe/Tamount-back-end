@@ -2,9 +2,13 @@ package ma.tamount.backend.repositories;
 
 import io.micrometer.common.lang.NonNullApi;
 import ma.tamount.backend.models.entities.Booking;
+import ma.tamount.backend.models.entities.Ride;
+import ma.tamount.backend.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -18,4 +22,6 @@ import java.util.UUID;
 @Repository
 @NonNullApi
 public interface BookingRepository extends JpaRepository<Booking, UUID> {
+    Optional<Booking> findBookingByRideAndUser(Ride ride, User user);
+    List<Booking> findAllByUser(User user);
 }

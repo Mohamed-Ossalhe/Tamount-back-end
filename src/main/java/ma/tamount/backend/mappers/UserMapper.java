@@ -21,8 +21,7 @@ import java.util.UUID;
 @Mapper(
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {RideMapper.class}
+        componentModel = MappingConstants.ComponentModel.SPRING
 )
 public interface UserMapper extends GenericMapper<UUID, RegistrationRequest, UserResponse, User> {
 }

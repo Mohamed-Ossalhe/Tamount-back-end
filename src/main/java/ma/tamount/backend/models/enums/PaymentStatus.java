@@ -15,7 +15,7 @@ public enum PaymentStatus {
     /**
      * The payment was successful.
      */
-    SUCCESS,
+    SUCCEEDED,
 
     /**
      * The payment failed.

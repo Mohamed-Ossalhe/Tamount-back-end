@@ -4,6 +4,7 @@ import ma.tamount.backend.interfaces.GenericService;
 import ma.tamount.backend.models.requests.BookingRequest;
 import ma.tamount.backend.models.responses.BookingResponse;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,4 +12,5 @@ import java.util.UUID;
  * @author Mohamed Ossalhe
  */
 public interface BookingService extends GenericService<UUID, BookingRequest, BookingResponse> {
+    List<BookingResponse> findAllByUser();
 }

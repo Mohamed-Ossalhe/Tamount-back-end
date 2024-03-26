@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import ma.tamount.backend.models.enums.PreferenceStatus;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * Represents a preferences entity in the system.
@@ -68,6 +66,5 @@ public class Preferences extends AbstractEntity {
      * Deletion of associated user records triggers a cascade delete action.
      */
     @OneToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 }

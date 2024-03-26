@@ -28,7 +28,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
 @Entity
 @SuperBuilder
 @SoftDelete
@@ -167,14 +166,12 @@ public class User extends AbstractEntity implements UserDetails {
      * Represents the list of cars associated with the user.
      */
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Car> cars;
 
     /**
      * Represents the preferences of the user.
      */
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Preferences preferences;
 
     /**
